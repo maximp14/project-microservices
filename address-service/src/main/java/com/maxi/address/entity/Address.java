@@ -1,4 +1,4 @@
-package com.maxi.clientservice.entity;
+package com.maxi.address.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,10 +17,13 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
-    private Long addressId;
+    private Long id;
 
-    @NotNull(message = "Street is required")
-    private String street;
+    @Column(name = "client_id")
+    private Long clientId;
+
+    @NotNull(message = "Address is required")
+    private String address;
 
     @NotNull(message = "City is required")
     private String city;
@@ -28,4 +31,10 @@ public class Address {
     @NotNull(message = "Province is required")
     private String province;
 
+    private String status;
+
+    @PrePersist
+    public void PrePersist(){
+        this.status = "CREATED";
+    }
 }

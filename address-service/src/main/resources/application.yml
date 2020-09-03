@@ -1,14 +1,14 @@
 server:
-  port: 9091
+  port: 9092
 
 spring:
   application:
-    name: client-service
+    name: address-service
   h2:
     console:
       enabled: true
   datasource:
-    url: jdbc:h2:mem:clientDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:addressDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driverClassName: org.h2.Driver
     plataform: h2
     username: sa
@@ -28,4 +28,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8099/eureka/
-

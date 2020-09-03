@@ -1,6 +1,7 @@
 package com.maxi.clientservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.maxi.clientservice.model.Address;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,11 +31,14 @@ public class Client {
     @Column(name = "created_at")
     private Date createdAt;
 
-    @NotNull(message = "Address is required")
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinColumn(name = "add_id")
-    private List<Address> address;
+//    @NotNull(message = "Address is required")
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    @JoinColumn(name = "add_id")
+//    private List<Address> address;
+
+    @Transient
+    private List<Address> addresses;
 
     private String status;
 

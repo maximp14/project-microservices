@@ -1,6 +1,5 @@
 package com.maxi.clientservice.service;
 
-import com.maxi.clientservice.entity.Address;
 import com.maxi.clientservice.entity.Client;
 
 import java.util.List;
@@ -12,5 +11,5 @@ public interface ClientService {
     Client createClient(Client client);
     Client updateClient(Client client);
     Client deleteClient(Client client);
-    Client addAddress(Long id, Address address);
+//    Client addAddress(Long id, Address address);
 }

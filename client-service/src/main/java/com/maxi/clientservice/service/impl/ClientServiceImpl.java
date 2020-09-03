@@ -1,8 +1,9 @@
 package com.maxi.clientservice.service.impl;
 
-import com.maxi.clientservice.entity.Address;
+
+import com.maxi.clientservice.client.AddressClient;
 import com.maxi.clientservice.entity.Client;
-import com.maxi.clientservice.repository.AddressRepository;
+import com.maxi.clientservice.model.Address;
 import com.maxi.clientservice.repository.ClientRepository;
 import com.maxi.clientservice.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,12 @@ import java.util.stream.Collectors;
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
-    private final AddressRepository addressRepository;
+    private final AddressClient addressClient;
 
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository, AddressRepository addressRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository, AddressClient addressClient) {
         this.clientRepository = clientRepository;
-        this.addressRepository = addressRepository;
+        this.addressClient = addressClient;
     }
 
     @Override
@@ -33,18 +34,20 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client getClient(Long id) {
-        if (id == null){
-            return null;
+        Client client = clientRepository.findById(id).orElse(null);
+        if (client != null){
+            List<Address> addresses = addressClient.findByClientId(client.getId()).getBody();
+            client.setAddresses(addresses);
         }
-        return clientRepository.findById(id).orElse(null);
+        return client;
     }
 
     @Override
     public Client createClient(Client client) {
-        Client clientAux = this.getClient(client.getId());
-        if (clientAux != null){
-            throw new IllegalStateException("User already created");
-        }
+//        Client clientAux = clientRepository.findById(client.getId()).orElse(null);
+//        if (clientAux != null){
+//            throw new IllegalStateException("User already created");
+//        }
         return clientRepository.save(client);
     }
 
@@ -72,16 +75,16 @@ public class ClientServiceImpl implements ClientService {
         return clientAux;
     }
 
-    @Override
-    public Client addAddress(Long id, Address address) {
-        Client client = getClient(id);
-        if (client == null){
-            return null;
-        }
-        addressRepository.save(address);
-        List<Address> addresses = client.getAddress();
-        addresses.add(address);
-        client.setAddress(addresses);
-        return clientRepository.save(client);
-    }
+//    @Override
+//    public Client addAddress(Long id, Address address) {
+//        Client client = getClient(id);
+//        if (client == null){
+//            return null;
+//        }
+//        addressRepository.save(address);
+//        List<Address> addresses = client.getAddress();
+//        addresses.add(address);
+//        client.setAddress(addresses);
+//        return clientRepository.save(client);
+//    }
 }
