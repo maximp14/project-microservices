@@ -44,10 +44,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client createClient(Client client) {
-//        Client clientAux = clientRepository.findById(client.getId()).orElse(null);
-//        if (clientAux != null){
-//            throw new IllegalStateException("User already created");
-//        }
         return clientRepository.save(client);
     }
 
@@ -55,36 +51,23 @@ public class ClientServiceImpl implements ClientService {
     public Client updateClient(Client client) {
         Client clientAux = this.getClient(client.getId());
         if (clientAux == null){
-            throw new IllegalStateException("User cannot be updated, because it does not exist");
+            return null;
         }
         clientAux.setId(client.getId());
         clientAux.setDescription(client.getDescription());
         clientAux.setName(client.getName());
-        clientRepository.save(clientAux);
-        return clientAux;
+        return clientRepository.save(clientAux);
     }
 
     @Override
     public Client deleteClient(Client client) {
         Client clientAux = this.getClient(client.getId());
         if (clientAux == null){
-            throw new IllegalStateException("User cannot be deleted, because it does not exist");
+            return null;
         }
         clientAux.setStatus("DELETED");
         clientRepository.save(clientAux);
         return clientAux;
     }
 
-//    @Override
-//    public Client addAddress(Long id, Address address) {
-//        Client client = getClient(id);
-//        if (client == null){
-//            return null;
-//        }
-//        addressRepository.save(address);
-//        List<Address> addresses = client.getAddress();
-//        addresses.add(address);
-//        client.setAddress(addresses);
-//        return clientRepository.save(client);
-//    }
 }

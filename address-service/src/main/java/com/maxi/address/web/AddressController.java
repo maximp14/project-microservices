@@ -1,16 +1,23 @@
 package com.maxi.address.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maxi.address.entity.Address;
 import com.maxi.address.service.AddressService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-/// TODOs WORK WITH VALIDATION DEPENDENCY /// USE UUID FOR THE IDs ?
 
 @Slf4j
 @RestController
@@ -25,11 +32,12 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<Address> addAddress(@RequestBody Address address){
+    public ResponseEntity<Address> addAddress(@Valid @RequestBody Address address, BindingResult result){
         log.info("Create address {}", address);
+        if (result.hasErrors()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
+        }
         Address addressAux = addressService.addAddress(address);
-        /// IMPROVE VALIDATION--
-
         return ResponseEntity.status(HttpStatus.CREATED).body(addressAux);
     }
 
@@ -37,7 +45,6 @@ public class AddressController {
     public ResponseEntity<Address> updateAddress(@PathVariable("id") Long id,@RequestBody Address address){
         log.info("Update address id {}", id);
         Address addressAux = addressService.updateAddress(address);
-        /// IMPROVE VALIDATION--
         if (address == null){
             log.error("Address {} not found", id);
             return ResponseEntity.notFound().build();
@@ -76,5 +83,26 @@ public class AddressController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(addresses);
+    }
+
+    private String formatMessage(BindingResult result){
+        List<Map<String,String>> errors = result.getFieldErrors().stream()
+                .map(err ->{
+                    Map<String,String> error =  new HashMap<>();
+                    error.put(err.getField(), err.getDefaultMessage());
+                    return error;
+
+                }).collect(Collectors.toList());
+        ErrorMessage errorMessage = ErrorMessage.builder()
+                .code("01")
+                .messages(errors).build();
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString="";
+        try {
+            jsonString = mapper.writeValueAsString(errorMessage);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return jsonString;
     }
 }
