@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AddressFallBack implements AddressClient{
+public class AddressHystrixFallBackFactory implements AddressClient{
 
     @Override
     public ResponseEntity<List<Address>> findByClientId(Long clientId) {
