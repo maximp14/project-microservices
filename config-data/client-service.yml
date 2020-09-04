@@ -4,8 +4,6 @@ server:
     include-message: always
 
 spring:
-  application:
-    name: client-service
   h2:
     console:
       enabled: true
@@ -26,8 +24,17 @@ spring:
         use_sql_comments: false
         format_sql: false
 
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8099/eureka/
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
