@@ -12,6 +12,6 @@ import java.util.List;
 @FeignClient(name = "address-service", fallback = AddressHystrixFallBackFactory.class)
 public interface AddressClient {
 
-    @GetMapping("/clients/{id}")
+    @GetMapping("api/address/clients/{id}")
     ResponseEntity<List<Address>> findByClientId(@PathVariable("id") Long clientId);
 }
