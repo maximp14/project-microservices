@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@FeignClient(name = "address-service")
+@FeignClient(name = "address-service", fallback = AddressFallBack.class)
 @RequestMapping("api/address")
 public interface AddressClient {
 
     @GetMapping("/clients/{id}")
-    public ResponseEntity<List<Address>> findByClientId(@PathVariable("id") Long clientId);
+    ResponseEntity<List<Address>> findByClientId(@PathVariable("id") Long clientId);
 }
