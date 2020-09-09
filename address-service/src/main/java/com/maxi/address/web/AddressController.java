@@ -85,6 +85,17 @@ public class AddressController {
         return ResponseEntity.ok(addresses);
     }
 
+    @GetMapping("/suppliers/{id}")
+    public ResponseEntity<List<Address>> findBySupplierId(@PathVariable("id") Long supplierId){
+        log.info("Find by supplier with id {}", supplierId);
+        List<Address> addresses = addressService.findBysupplierId(supplierId);
+        if (addresses.isEmpty()){
+            log.error("Address supplier id {} no content", supplierId);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(addresses);
+    }
+
     private String formatMessage(BindingResult result){
         List<Map<String,String>> errors = result.getFieldErrors().stream()
                 .map(err ->{

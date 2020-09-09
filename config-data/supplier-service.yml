@@ -1,5 +1,7 @@
 server:
-  port: 8082
+  port: 9093
+  error:
+    include-message: always
 
 spring:
   h2:
@@ -22,3 +24,17 @@ spring:
         use_sql_comments: false
         format_sql: false
 
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8099/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

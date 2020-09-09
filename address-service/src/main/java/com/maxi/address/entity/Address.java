@@ -22,6 +22,9 @@ public class Address {
     @Column(name = "client_id")
     private Long clientId;
 
+    @Column(name = "supplier_id")
+    private Long supplierId;
+
     @NotNull(message = "Address is required")
     private String address;
 

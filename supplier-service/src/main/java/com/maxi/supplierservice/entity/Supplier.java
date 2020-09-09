@@ -1,10 +1,12 @@
 package com.maxi.supplierservice.entity;
 
+import com.maxi.supplierservice.model.Address;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,6 +30,9 @@ public class Supplier {
     private String description;
 
     private String status;
+
+    @Transient
+    List<Address> addressList;
 
     @PrePersist
     public void prePersist(){

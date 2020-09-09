@@ -63,4 +63,9 @@ public class AddressServiceImpl implements AddressService {
     public List<Address> findByClientId(Long clientId) {
         return addressRepository.findByClientId(clientId);
     }
+
+    @Override
+    public List<Address> findBysupplierId(Long supplierId) {
+        return addressRepository.findBySupplierId(supplierId);
+    }
 }

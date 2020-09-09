@@ -1,21 +1,26 @@
 package com.maxi.supplierservice.service.impl;
 
+import com.maxi.supplierservice.client.AddressClient;
 import com.maxi.supplierservice.entity.Supplier;
+import com.maxi.supplierservice.model.Address;
 import com.maxi.supplierservice.repository.SupplierRepository;
 import com.maxi.supplierservice.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class SupplierServiceImpl implements SupplierService {
 
     private final SupplierRepository supplierRepository;
+    private final AddressClient addressClient;
 
     @Autowired
-    public SupplierServiceImpl(SupplierRepository supplierRepository) {
+    public SupplierServiceImpl(SupplierRepository supplierRepository, AddressClient addressClient) {
         this.supplierRepository = supplierRepository;
+        this.addressClient = addressClient;
     }
 
     @Override
@@ -25,10 +30,12 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Supplier getSupplier(Long id) {
-        if (id == null){
-            return null;
+        Supplier supplier = supplierRepository.findById(id).orElse(null);
+        if (supplier != null){
+            List<Address> addresses = addressClient.findBySupplierId(supplier.getId()).getBody();
+            supplier.setAddressList(addresses);
         }
-        return supplierRepository.findById(id).orElse(null);
+        return supplier;
     }
 
     @Override
