@@ -76,6 +76,17 @@ public class SupplierController {
         return ResponseEntity.ok(supplierDeleted);
     }
 
+    @GetMapping("/client/{id}")
+    public ResponseEntity<List<Supplier>> getSupplierByClientId(@PathVariable("id") Long clientId){
+        log.info("Getting suppliers to the client id {}",clientId);
+        List<Supplier> suppliers = supplierService.findSupplierByClientId(clientId);
+        if (suppliers.isEmpty()){
+            log.error("No supplier for the client id {}",clientId);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(suppliers);
+    }
+
     private String formatMessage(BindingResult result){
         List<Map<String,String>> errors = result.getFieldErrors().stream()
                 .map(err ->{

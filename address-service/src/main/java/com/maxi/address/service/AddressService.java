@@ -11,5 +11,5 @@ public interface AddressService {
     Address updateAddress(Address address);
     Address getAddress(Long id);
     List<Address> findByClientId(Long clientId);
-    List<Address> findBysupplierId(Long supplierId);
+    List<Address> findBySupplierId(Long supplierId);
 }

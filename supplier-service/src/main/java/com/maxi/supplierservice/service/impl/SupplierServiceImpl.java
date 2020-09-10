@@ -62,4 +62,16 @@ public class SupplierServiceImpl implements SupplierService {
         supplierRepository.save(supplierAux);
         return supplierAux;
     }
+
+    @Override
+    public List<Supplier> findSupplierByClientId(Long clientId) {
+        List<Supplier> suppliers = supplierRepository.findByClientId(clientId);
+        if (suppliers.isEmpty()){
+            return null;
+        }
+        suppliers.stream()
+                .forEach(supplier -> this.getSupplier(supplier.getId()));
+
+        return suppliers;
+    }
 }

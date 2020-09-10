@@ -31,6 +31,8 @@ public class Supplier {
 
     private String status;
 
+    private Long clientId;
+
     @Transient
     List<Address> addressList;
 

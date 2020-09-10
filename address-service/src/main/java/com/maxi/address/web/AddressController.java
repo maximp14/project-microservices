@@ -88,7 +88,7 @@ public class AddressController {
     @GetMapping("/suppliers/{id}")
     public ResponseEntity<List<Address>> findBySupplierId(@PathVariable("id") Long supplierId){
         log.info("Find by supplier with id {}", supplierId);
-        List<Address> addresses = addressService.findBysupplierId(supplierId);
+        List<Address> addresses = addressService.findBySupplierId(supplierId);
         if (addresses.isEmpty()){
             log.error("Address supplier id {} no content", supplierId);
             return ResponseEntity.noContent().build();

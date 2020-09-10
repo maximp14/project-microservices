@@ -65,7 +65,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public List<Address> findBysupplierId(Long supplierId) {
+    public List<Address> findBySupplierId(Long supplierId) {
         return addressRepository.findBySupplierId(supplierId);
     }
 }

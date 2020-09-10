@@ -2,8 +2,10 @@ package com.maxi.clientservice.service.impl;
 
 
 import com.maxi.clientservice.client.AddressClient;
+import com.maxi.clientservice.client.SupplierClient;
 import com.maxi.clientservice.entity.Client;
 import com.maxi.clientservice.model.Address;
+import com.maxi.clientservice.model.Supplier;
 import com.maxi.clientservice.repository.ClientRepository;
 import com.maxi.clientservice.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,13 @@ public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
     private final AddressClient addressClient;
+    private final SupplierClient supplierClient;
 
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository, AddressClient addressClient) {
+    public ClientServiceImpl(ClientRepository clientRepository, AddressClient addressClient, SupplierClient supplierClient) {
         this.clientRepository = clientRepository;
         this.addressClient = addressClient;
+        this.supplierClient = supplierClient;
     }
 
     @Override
@@ -37,7 +41,9 @@ public class ClientServiceImpl implements ClientService {
         Client client = clientRepository.findById(id).orElse(null);
         if (client != null){
             List<Address> addresses = addressClient.findByClientId(client.getId()).getBody();
+            List<Supplier> suppliers = supplierClient.getSupplierByClientId(client.getId()).getBody();
             client.setAddresses(addresses);
+            client.setSuppliers(suppliers);
         }
         return client;
     }
