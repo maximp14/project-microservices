@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
-@RequestMapping("api/supplier")
+@RequestMapping("/api/supplier")
 public class SupplierController {
 
     private final SupplierService supplierService;
