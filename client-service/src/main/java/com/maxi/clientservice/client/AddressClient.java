@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "address-service", fallback = AddressHystrixFallBackFactory.class)
+@FeignClient(name = "address-service", fallbackFactory = AddressHystrixFallBackFactory.class)
 public interface AddressClient {
 
     @GetMapping("api/address/clients/{id}")
-    ResponseEntity<List<Address>> findByClientId(@PathVariable("id") Long clientId);
+    public ResponseEntity<List<Address>> findByClientId(@PathVariable("id") Long clientId);
 }

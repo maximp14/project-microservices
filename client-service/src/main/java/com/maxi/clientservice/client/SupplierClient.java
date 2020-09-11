@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "supplier-service", fallback = SupplierHystrixFallBackFactory.class)
+@FeignClient(name = "supplier-service", fallbackFactory = SupplierHystrixFallBackFactory.class)
 public interface SupplierClient {
 
     @GetMapping("api/supplier/client/{id}")

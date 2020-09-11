@@ -80,7 +80,7 @@ public class SupplierController {
     public ResponseEntity<List<Supplier>> getSupplierByClientId(@PathVariable("id") Long clientId){
         log.info("Getting suppliers to the client id {}",clientId);
         List<Supplier> suppliers = supplierService.findSupplierByClientId(clientId);
-        if (suppliers.isEmpty()){
+        if (suppliers == null){
             log.error("No supplier for the client id {}",clientId);
             return ResponseEntity.noContent().build();
         }

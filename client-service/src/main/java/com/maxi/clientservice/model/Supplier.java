@@ -20,8 +20,6 @@ public class Supplier {
     private Date registrationDate;
     private Date withdrawDate;
     private String description;
-    private String status;
-    private Long clientId;
     List<Address> addressList;
 
 }

@@ -1,10 +1,12 @@
 package com.maxi.clientservice.model;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
-@Data
+@Getter
+@Setter
 @Builder
 public class Address {
 
@@ -12,7 +14,5 @@ public class Address {
     private String address;
     private String city;
     private String province;
-    private String status;
-    private Long clientId;
 
 }

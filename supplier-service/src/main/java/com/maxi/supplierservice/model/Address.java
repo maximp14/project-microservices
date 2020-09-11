@@ -12,7 +12,6 @@ public class Address {
     private String address;
     private String city;
     private String province;
-    private String status;
     private Long supplierId;
 
 }
