@@ -1,9 +1,9 @@
 package com.maxi.clientservice.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.maxi.clientservice.model.Address;
 import com.maxi.clientservice.model.Supplier;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "tbl_clients")
 public class Client {
@@ -46,4 +47,5 @@ public class Client {
         this.createdAt = new Date();
         this.status = "ACTIVE";
     }
+
 }

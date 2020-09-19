@@ -14,4 +14,6 @@ public interface AddressClient {
 
     @GetMapping("api/address/clients/{id}")
     public ResponseEntity<List<Address>> findByClientId(@PathVariable("id") Long clientId);
+
+
 }

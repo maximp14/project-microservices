@@ -21,6 +21,8 @@ public class ClientServiceImpl implements ClientService {
     private final AddressClient addressClient;
     private final SupplierClient supplierClient;
 
+
+
     @Autowired
     public ClientServiceImpl(ClientRepository clientRepository, AddressClient addressClient, SupplierClient supplierClient) {
         this.clientRepository = clientRepository;
@@ -59,7 +61,7 @@ public class ClientServiceImpl implements ClientService {
         if (clientAux == null){
             return null;
         }
-        clientAux.setId(client.getId());
+        //clientAux.setId(client.getId());
         clientAux.setDescription(client.getDescription());
         clientAux.setName(client.getName());
         return clientRepository.save(clientAux);
