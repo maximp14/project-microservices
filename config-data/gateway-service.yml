@@ -25,3 +25,10 @@ spring:
           uri: lb://supplier-service
           predicates:
             - Path=/api/supplier/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+            - GET
+            - POST
