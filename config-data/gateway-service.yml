@@ -28,7 +28,7 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "*"
+            allowedOrigins: "http://localhost:3000/addClient"
             allowedMethods:
             - GET
             - POST
