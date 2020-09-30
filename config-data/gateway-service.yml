@@ -31,5 +31,5 @@ spring:
             allowedOrigins: "*"
             allowed-methods: "*"
             allowed-headers: "*"
-           
+            allow-credentials: true
       
