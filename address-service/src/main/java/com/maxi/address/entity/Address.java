@@ -28,6 +28,9 @@ public class Address {
     @NotNull(message = "Address is required")
     private String address;
 
+    @NotNull(message = "Country is required")
+    private String country;
+
     @NotNull(message = "City is required")
     private String city;
 

@@ -87,6 +87,16 @@ public class ClientController {
         return ResponseEntity.ok(client);
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Client> findClientByName(@PathVariable("name") String name){
+        log.info("Searching client by name {}", name);
+        Client client = clientService.findByName(name);
+        if (client == null){
+            log.error("Client name {} not found",name);
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(client);
+    }
 
     private String formatMessage(BindingResult result){
         List<Map<String,String>> errors = result.getFieldErrors().stream()

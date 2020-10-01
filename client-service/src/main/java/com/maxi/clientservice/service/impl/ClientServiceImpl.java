@@ -78,4 +78,13 @@ public class ClientServiceImpl implements ClientService {
         return clientAux;
     }
 
+
+    @Override
+    public Client findByName(String name) {
+        Client client = clientRepository.findByName(name);
+        if (client == null){
+            return null;
+        }
+        return client;
+    }
 }
