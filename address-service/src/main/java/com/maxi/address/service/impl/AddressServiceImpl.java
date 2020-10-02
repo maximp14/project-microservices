@@ -28,9 +28,9 @@ public class AddressServiceImpl implements AddressService {
         if (addressAux != null){
             return null;
         }
-        if (!addressAux.getClientName().isEmpty()){
-            Client client = clientClient.findClientByName(addressAux.getClientName()).getBody();
-            addressAux.setClientId(client.getId());
+        if (!address.getClientName().isEmpty()){
+            Client client = clientClient.findClientByName(address.getClientName()).getBody();
+            address.setClientId(client.getId());
         }
         return addressRepository.save(address);
     }

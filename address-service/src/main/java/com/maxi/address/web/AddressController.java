@@ -36,6 +36,7 @@ public class AddressController {
     public ResponseEntity<Address> addAddress(@Valid @RequestBody Address address, BindingResult result){
         log.info("Create address {}", address);
         if (result.hasErrors()){
+            log.error("Error Creating address {}", address);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
         Address addressAux = addressService.addAddress(address);

@@ -9,4 +9,7 @@ import lombok.Setter;
 @Builder
 public class Client {
     private Long id;
+    private String name;
+    private Long cuit;
+    private String description;
 }

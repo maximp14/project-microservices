@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "client-service", fallbackFactory = ClientHystrixFallBackFactory.class)
 public interface ClientClient {
 
-    @GetMapping("api/address/name/{name}")
+    @GetMapping("/api/clients/name/{name}")
     public ResponseEntity<Client> findClientByName(@PathVariable("name") String name);
 }
