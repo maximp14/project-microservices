@@ -33,8 +33,15 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8099/eureka/
 
+Feign:
+  hystrix:
+    enabled: true
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"

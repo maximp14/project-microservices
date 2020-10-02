@@ -1,6 +1,7 @@
 package com.maxi.address.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "tbl_address")
 public class Address {
@@ -36,6 +38,9 @@ public class Address {
 
     @NotNull(message = "Province is required")
     private String province;
+
+    @Transient
+    private String clientName;
 
     private String status;
 

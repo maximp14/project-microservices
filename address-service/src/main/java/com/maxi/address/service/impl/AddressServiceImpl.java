@@ -1,6 +1,8 @@
 package com.maxi.address.service.impl;
 
+import com.maxi.address.client.ClientClient;
 import com.maxi.address.entity.Address;
+import com.maxi.address.model.Client;
 import com.maxi.address.repository.AddressRepository;
 import com.maxi.address.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,12 @@ import java.util.List;
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
+    private final ClientClient clientClient;
 
     @Autowired
-    public AddressServiceImpl(AddressRepository addressRepository) {
+    public AddressServiceImpl(AddressRepository addressRepository, ClientClient clientClient) {
         this.addressRepository = addressRepository;
+        this.clientClient = clientClient;
     }
 
     @Override
@@ -23,6 +27,10 @@ public class AddressServiceImpl implements AddressService {
         Address addressAux = this.getAddress(address.getId());
         if (addressAux != null){
             return null;
+        }
+        if (!addressAux.getClientName().isEmpty()){
+            Client client = clientClient.findClientByName(addressAux.getClientName()).getBody();
+            addressAux.setClientId(client.getId());
         }
         return addressRepository.save(address);
     }
