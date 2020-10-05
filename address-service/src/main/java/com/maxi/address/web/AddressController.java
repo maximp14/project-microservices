@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@CrossOrigin("*")
+
 @Slf4j
 @RestController
 @RequestMapping("/api/address")
