@@ -1,0 +1,7 @@
+.client-table{
+    width: 55em;
+    margin: 10em auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}

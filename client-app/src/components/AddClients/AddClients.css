@@ -1,0 +1,10 @@
+.client-form{
+    width: 55em;
+    margin: 8em auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+
+
